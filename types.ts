@@ -1,8 +1,8 @@
 export interface SWContext {
-    context: string;
+    content: string;
 };
 
 export interface SWPlugin {
     name: string;
-    execute: (context: SWContext) => SWContext;
+    execute: (content: SWContext) => SWContext;
 }

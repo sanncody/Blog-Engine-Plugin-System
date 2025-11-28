@@ -1,4 +1,4 @@
-import { SWPlugin } from "./types";
+import type { SWContext, SWPlugin } from "./types";
 
 export class PluginManager {
     plugins: SWPlugin[] = []
@@ -10,5 +10,15 @@ export class PluginManager {
         }
         this.plugins.push(plugin);
         console.log(`✔️ Plugin: ${plugin.name} registered!`);
+    }
+
+    execute(context: SWContext): SWContext {
+        
+        let result = { ...context };
+        for (const plugin of this.plugins) {
+            result = plugin.execute(result);
+        }
+
+        return result;
     }
 }

@@ -1,5 +1,5 @@
 import { PluginManager } from "./pluginManager";
-import { SWPlugin } from "./types";
+import { SWContext, SWPlugin } from "./types";
 
 // Structure of plugin  
 /*{
@@ -21,10 +21,21 @@ export class BlogEngine {
 
     use(plugin: SWPlugin) {
         this.pluginManager.register(plugin);
+
+        return this;
     }
 
-    process(content: string): string {
-        // todo: process
-        return `${content} - By Sann`;
+    process(content: string): SWContext {
+        console.log();
+        
+        console.log("Content is processing...\n");
+        
+        const context: SWContext = {
+            content
+        };
+
+        const finalResult = this.pluginManager.execute(context);
+        
+        return finalResult;
     }
 };
